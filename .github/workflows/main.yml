@@ -22,7 +22,7 @@ jobs:
       run: pip install pandas
 
     - name: Run IP extraction script
-      run: python 优选ip/转换.py  # py文件在优选ip目录下
+      run: python 转换.py
 
     - name: Commit 和 push changes
       uses: stefanzweifel/git-auto-commit-action@v4
