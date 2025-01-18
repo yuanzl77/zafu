@@ -1,1 +1,31 @@
-无内容
+name: 转换
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # 每天凌晨 5 点执行
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install pandas
+
+    - name: Run IP extraction script
+      run: python 转换.py
+
+    - name: Commit 和 push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'Update ip.txt with extracted IPs'
+        branch: 优选ip
